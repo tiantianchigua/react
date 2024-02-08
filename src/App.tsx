@@ -1,6 +1,6 @@
 // import React, { Suspense, FC } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import routerList from "./pages";
 import { Layout } from "antd";
 import SideBar from "./component/common/sideBar";
@@ -15,8 +15,12 @@ const { Header, Footer, Sider, Content } = Layout;
 const App: React.FC = () => {
   return (
     <Layout style={layoutStyle}>
+      {" "}
+      <Link to="/login">login</Link>
       <Sider width="20%" style={siderStyle}>
         <SideBar />
+        {/*  */}
+        {/* <Link to="/login">login</Link> */}
       </Sider>
       <Layout>
         <Header style={headerStyle}>Header</Header>
