@@ -11,12 +11,21 @@ const Home: React.FC = React.lazy(() => import("./home"));
 
 const Login: React.FC = React.lazy(() => import("./login"));
 
+const Users: React.FC = React.lazy(() => import("./users"));
+
 const routerList: RouterItem[] = [
   {
     name: "home",
     routeProps: {
       path: "/home",
       element: <Home />,
+    },
+  },
+  {
+    name: "user",
+    routeProps: {
+      path: "/home/user",
+      element: <Users />,
     },
   },
   {

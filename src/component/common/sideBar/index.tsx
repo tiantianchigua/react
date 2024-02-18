@@ -9,7 +9,7 @@ import {
 import { Menu } from "antd";
 import type { GetProp, MenuProps } from "antd";
 
-//type MenuTheme = GetProp<MenuProps, "theme">;
+import { useNavigate } from "react-router-dom";
 
 type MenuItem = GetProp<MenuProps, "items">[number];
 
@@ -54,8 +54,10 @@ const items: MenuItem[] = [
 ];
 
 const SideBar: React.FC = () => {
+  const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log(e);
+    console.log(e, "1");
+    navigate("/home");
   };
   return (
     <Menu

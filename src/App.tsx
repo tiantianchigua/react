@@ -1,6 +1,6 @@
-// import React, { Suspense, FC } from "react";
+import React, { Suspense } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routerList from "./pages";
 import { Layout } from "antd";
 import SideBar from "./component/common/sideBar";
@@ -15,28 +15,26 @@ const { Header, Footer, Sider, Content } = Layout;
 const App: React.FC = () => {
   return (
     <Layout style={layoutStyle}>
-      {" "}
-      <Link to="/login">login</Link>
       <Sider width="20%" style={siderStyle}>
         <SideBar />
-        {/*  */}
-        {/* <Link to="/login">login</Link> */}
       </Sider>
       <Layout>
         <Header style={headerStyle}>Header</Header>
         <Content style={contentStyle}>
           <BrowserRouter>
-            <Routes>
-              {routerList.map((m: ModuleProps) => {
-                return (
-                  <Route
-                    path={m.routeProps.path}
-                    element={m.routeProps.element}
-                    key={m.name}
-                  />
-                );
-              })}
-            </Routes>
+            <Suspense>
+              <Routes>
+                {routerList.map((m: ModuleProps) => {
+                  return (
+                    <Route
+                      path={m.routeProps.path}
+                      element={m.routeProps.element}
+                      key={m.name}
+                    />
+                  );
+                })}
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </Content>
         <Footer style={footerStyle}>Footer</Footer>
@@ -52,7 +50,6 @@ const headerStyle: React.CSSProperties = {
   paddingInline: 48,
   lineHeight: "64px",
   backgroundColor: "#fff",
-  // backgroundColor: "#4096ff",
 };
 
 const contentStyle: React.CSSProperties = {
