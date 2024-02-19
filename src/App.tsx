@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import routerList from "./pages";
+import routerList from "./views";
 import { Layout } from "antd";
 import SideBar from "./component/common/sideBar";
 
@@ -14,32 +14,30 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const App: React.FC = () => {
   return (
-    <Layout style={layoutStyle}>
-      <Sider width="20%" style={siderStyle}>
-        <SideBar />
-      </Sider>
-      <Layout>
-        <Header style={headerStyle}>Header</Header>
-        <Content style={contentStyle}>
-          <BrowserRouter>
-            <Suspense>
-              <Routes>
-                {routerList.map((m: ModuleProps) => {
-                  return (
-                    <Route
-                      path={m.routeProps.path}
-                      element={m.routeProps.element}
-                      key={m.name}
-                    />
-                  );
-                })}
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </Content>
-        <Footer style={footerStyle}>Footer</Footer>
+    <BrowserRouter>
+      <Layout style={layoutStyle}>
+        <Sider width="20%" style={siderStyle}>
+          <SideBar />
+        </Sider>
+        <Layout>
+          <Header style={headerStyle}>Header</Header>
+          <Content style={contentStyle}>
+            <Routes>
+              {routerList.map((m: ModuleProps) => {
+                return (
+                  <Route
+                    path={m.routeProps.path}
+                    element={m.routeProps.element}
+                    key={m.name}
+                  />
+                );
+              })}
+            </Routes>
+          </Content>
+          <Footer style={footerStyle}>Footer</Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </BrowserRouter>
   );
 };
 

@@ -8,7 +8,6 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import type { GetProp, MenuProps } from "antd";
-
 import { useNavigate } from "react-router-dom";
 
 type MenuItem = GetProp<MenuProps, "items">[number];
@@ -20,29 +19,21 @@ function getItem(
   children?: MenuItem[]
 ): MenuItem {
   return {
+    label,
     key,
     icon,
     children,
-    label,
   } as MenuItem;
 }
 
 const items: MenuItem[] = [
-  getItem("Navigation One", "1", <MailOutlined />),
-  getItem("Navigation Two", "2", <CalendarOutlined />),
-  getItem("Navigation Two", "sub1", <AppstoreOutlined />, [
-    getItem("Option 3", "3"),
-    getItem("Option 4", "4"),
+  getItem("Login", "/login", <MailOutlined />),
+  getItem("Home", "/home", <CalendarOutlined />),
+  getItem("About", "sub1", <AppstoreOutlined />, [
     getItem("Submenu", "sub1-2", null, [
-      getItem("Option 5", "5"),
+      getItem("About", "/about", null),
       getItem("Option 6", "6"),
     ]),
-  ]),
-  getItem("Navigation Three", "sub2", <SettingOutlined />, [
-    getItem("Option 7", "7"),
-    getItem("Option 8", "8"),
-    getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
   ]),
   getItem(
     <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
@@ -56,13 +47,12 @@ const items: MenuItem[] = [
 const SideBar: React.FC = () => {
   const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log(e, "1");
-    navigate("/home");
+    navigate(e.keyPath[0]);
   };
+
   return (
     <Menu
       onClick={onClick}
-      style={{ width: 256 }}
       defaultSelectedKeys={["1"]}
       defaultOpenKeys={["sub1"]}
       mode="inline"
