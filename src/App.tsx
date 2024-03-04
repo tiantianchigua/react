@@ -1,43 +1,15 @@
-import React, { Suspense } from "react";
+import React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import routerList from "./views";
-import { Layout } from "antd";
-import SideBar from "./component/common/sideBar";
-
-export interface ModuleProps {
-  name: string;
-  routeProps: { path: string; element: React.ReactElement };
-}
-
-const { Header, Footer, Sider, Content } = Layout;
+import RouterList from "./views";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Layout style={layoutStyle}>
-        <Sider width="20%" style={siderStyle}>
-          <SideBar />
-        </Sider>
-        <Layout>
-          <Header style={headerStyle}>Header</Header>
-          <Content style={contentStyle}>
-            <Routes>
-              {routerList.map((m: ModuleProps) => {
-                return (
-                  <Route
-                    path={m.routeProps.path}
-                    element={m.routeProps.element}
-                    key={m.name}
-                  />
-                );
-              })}
-            </Routes>
-          </Content>
-          <Footer style={footerStyle}>Footer</Footer>
-        </Layout>
-      </Layout>
-    </BrowserRouter>
+    <div>
+      <Router>
+        <RouterList></RouterList>
+      </Router>
+    </div>
   );
 };
 
